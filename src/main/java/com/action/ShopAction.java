@@ -1,34 +1,33 @@
 package com.action;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.List;
+		import java.io.File;
+		import java.io.IOException;
+		import java.util.List;
 
-import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+		import javax.annotation.Resource;
+		import javax.servlet.http.HttpServletRequest;
+		import javax.servlet.http.HttpServletResponse;
+		import javax.servlet.http.HttpSession;
 
-import org.apache.commons.io.FileUtils;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.multipart.MultipartFile;
+		import org.apache.commons.io.FileUtils;
+		import org.springframework.stereotype.Controller;
+		import org.springframework.web.bind.annotation.RequestMapping;
+		import org.springframework.web.multipart.MultipartFile;
 
-import com.biz.IBiz;
-import com.po.PageBean;
-import com.po.Shop;
-import com.po.Users;
+		import com.biz.IBiz;
+		import com.po.PageBean;
+		import com.po.Shop;
+		import com.po.Users;
 
 
 @Controller
 public class ShopAction implements IShopAction {
 	@Resource(name="ShopBiz")
-	  private IBiz iBiz;
+	private IBiz iBiz;
 	private HttpSession session;
-	
-	
-	
-	
+
+
+
 	public IBiz getiBiz() {
 		return iBiz;
 	}
@@ -49,10 +48,10 @@ public class ShopAction implements IShopAction {
 		System.out.println(flag);
 		if(flag){
 			session = request.getSession();
-			session.setAttribute("success", "×¢²á³É¹¦£¡");
+			session.setAttribute("success", "æ³¨å†ŒæˆåŠŸï¼");
 			return "redirect:login.jsp";
 		}else{
-			session.setAttribute("message", "ÕË»§³¬¹ıÎå¸ö£¬×¢²áÊ§°Ü£¡");
+			session.setAttribute("message", "è´¦æˆ·è¶…è¿‡äº”ä¸ªï¼Œæ³¨å†Œå¤±è´¥ï¼");
 			return "redirect:register.jsp";
 		}
 	}
@@ -66,11 +65,11 @@ public class ShopAction implements IShopAction {
 		System.out.println(olduser.getUname()+olduser.getUpassword());
 		if(uname.equals(olduser.getUname())&&upassword.equals(olduser.getUpassword())){
 			session = request.getSession();
-			session.setAttribute("success", "µÇÂ¼³É¹¦£¡");
-			System.out.println("µÇÂ½³É¹¦");
+			session.setAttribute("success", "ç™»å½•æˆåŠŸï¼");
+			System.out.println("ç™»é™†æˆåŠŸ");
 			return "redirect:add.jsp";
 		}else {
-			session.setAttribute("message", "µÇÂ½Ê§°Ü£¬ÕËºÅ»òÕßÃÜÂë´íÎó£¡");
+			session.setAttribute("message", "ç™»é™†å¤±è´¥ï¼Œè´¦å·æˆ–è€…å¯†ç é”™è¯¯ï¼");
 			return "redirect:register.jsp";
 		}
 	}
@@ -101,10 +100,10 @@ public class ShopAction implements IShopAction {
 			boolean flag = iBiz.updata(user);
 			if(flag){
 				session = request.getSession();
-				session.setAttribute("success", "ĞŞ¸Ä³É¹¦£¬ÇëÖØĞÂµÇÂ¼");
+				session.setAttribute("success", "ä¿®æ”¹æˆåŠŸï¼Œè¯·é‡æ–°ç™»å½•");
 				return "redirect:login.jsp";
 			}else{
-				session.setAttribute("message", "ĞŞ¸ÄÊ§°Ü£¬Çë×¢²á");
+				session.setAttribute("message", "ä¿®æ”¹å¤±è´¥ï¼Œè¯·æ³¨å†Œ");
 				return "redirect:register.jsp";
 			}
 		}
@@ -113,7 +112,7 @@ public class ShopAction implements IShopAction {
 
 	@RequestMapping(value="UdelById_Shop.do")
 	public String UdelById(HttpServletRequest request, HttpServletResponse response, String uname) {
-		//×¢ÏúÒ³Ãæ
+		//æ³¨é”€é¡µé¢
 		uname=request.getParameter("uname");
 		String upassword = request.getParameter("upassword");
 		String queshion = request.getParameter("queshion");
@@ -126,12 +125,12 @@ public class ShopAction implements IShopAction {
 			boolean flag=iBiz.UdelById(olduser.getUname());
 			if(flag){
 				session = request.getSession();
-				session.setAttribute("message", "×¢Ïú³É¹¦£¡");
-				   return "redirect:register.jsp";
-			   }else{
-				   session.setAttribute("success", "ÇëÖØĞÂµÇÂ¼£¡");
-				   return "redirect:login.jsp";
-			   }
+				session.setAttribute("message", "æ³¨é”€æˆåŠŸï¼");
+				return "redirect:register.jsp";
+			}else{
+				session.setAttribute("success", "è¯·é‡æ–°ç™»å½•ï¼");
+				return "redirect:login.jsp";
+			}
 		}
 		return null;
 	}
@@ -139,111 +138,111 @@ public class ShopAction implements IShopAction {
 	@RequestMapping(value="save_Shop.do")
 	public String save(HttpServletRequest request, HttpServletResponse response, Shop sp) {
 		String realpath=request.getRealPath("/");
-	     /**********ÎÄ¼şÉÏ´«************/
-	     //»ñÈ¡ÉÏ´«ÕÕÆ¬¶ÔÏó
-	     MultipartFile multipartFile=sp.getPic();
-	     if(multipartFile!=null&&!multipartFile.isEmpty()){
-	    	 //»ñÈ¡ÉÏ´«ÎÄ¼şÃû³Æ
-	    	 String imgname=multipartFile.getOriginalFilename();
-	    	 //¸üÃû
-	    	 if(imgname.lastIndexOf(".")!=-1){
-	    		 //»ñÈ¡ºó×º
-	    		 String ext=imgname.substring(imgname.lastIndexOf("."));
-	    		 //ÅĞ¶Ïºó×º¸ñÊ½
-	    		 if(ext.equalsIgnoreCase(".jpg")||ext.equalsIgnoreCase(".png")){
-	    			 //¸ÄÃû
-	    			 String newimgname=sp.getSname()+ext;
-	    			 //´´½¨ÎÄ¼ş¶ÔÏó£¬Ö¸¶¨ÉÏ´«ÎÄ¼şµÄÂ·¾¶
-	    			 File dostFile=new File(realpath+"/shop/"+newimgname);
-	    			 //ÉÏ´«
-	    			 try {
+		/**********æ–‡ä»¶ä¸Šä¼ ************/
+		//è·å–ä¸Šä¼ ç…§ç‰‡å¯¹è±¡
+		MultipartFile multipartFile=sp.getPic();
+		if(multipartFile!=null&&!multipartFile.isEmpty()){
+			//è·å–ä¸Šä¼ æ–‡ä»¶åç§°
+			String imgname=multipartFile.getOriginalFilename();
+			//æ›´å
+			if(imgname.lastIndexOf(".")!=-1){
+				//è·å–åç¼€
+				String ext=imgname.substring(imgname.lastIndexOf("."));
+				//åˆ¤æ–­åç¼€æ ¼å¼
+				if(ext.equalsIgnoreCase(".jpg")||ext.equalsIgnoreCase(".png")){
+					//æ”¹å
+					String newimgname=sp.getSname()+ext;
+					//åˆ›å»ºæ–‡ä»¶å¯¹è±¡ï¼ŒæŒ‡å®šä¸Šä¼ æ–‡ä»¶çš„è·¯å¾„
+					File dostFile=new File(realpath+"/shop/"+newimgname);
+					//ä¸Šä¼ 
+					try {
 						FileUtils.copyInputStreamToFile(multipartFile.getInputStream(), dostFile);
-						 sp.setImgname(newimgname);
+						sp.setImgname(newimgname);
 					} catch (IOException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-	    		 }
-	    	 }
-	     }
-	     /**********ÎÄ¼şÉÏ´«end************/
-	     boolean flag=iBiz.save(sp);
-	     if(flag){
-	    	 session = request.getSession();
-	    	 session.setAttribute("success", "Ìí¼ÓÉÌÆ·³É¹¦£¡");
-	    	 return "redirect:findAllPage_Shop.do";
-	     }
-	     session.setAttribute("success", "Ìí¼ÓÉÌÆ·Ê§°Ü£¡");
+				}
+			}
+		}
+		/**********æ–‡ä»¶ä¸Šä¼ end************/
+		boolean flag=iBiz.save(sp);
+		if(flag){
+			session = request.getSession();
+			session.setAttribute("success", "æ·»åŠ å•†å“æˆåŠŸï¼");
+			return "redirect:findAllPage_Shop.do";
+		}
+		session.setAttribute("success", "æ·»åŠ å•†å“å¤±è´¥ï¼");
 		return "redirect:add.jsp";
 	}
 
 	@RequestMapping(value="update_Shop.do")
 	public String update(HttpServletRequest request, HttpServletResponse response, Shop sp) {
-		//»ñÈ¡Ô­À´µÄÕÕÆ¬£¬ÔÚ²»ĞŞ¸ÄÕÕÆ¬µÄÊ±ºò£¬Õ¹Ê¾Ô­À´µÄÕÕÆ¬
+		//è·å–åŸæ¥çš„ç…§ç‰‡ï¼Œåœ¨ä¸ä¿®æ”¹ç…§ç‰‡çš„æ—¶å€™ï¼Œå±•ç¤ºåŸæ¥çš„ç…§ç‰‡
 		String oldimgname=iBiz.findById(sp.getSid()).getImgname();
-		 String realpath=request.getRealPath("/");
-		  /**********ÎÄ¼şÉÏ´«************/
-	     //»ñÈ¡ÉÏ´«ÕÕÆ¬¶ÔÏó
-	     MultipartFile multipartFile=sp.getPic();
-	     if(multipartFile!=null&&!multipartFile.isEmpty()){
-	    	 //»ñÈ¡ÉÏ´«ÎÄ¼şÃû³Æ
-	    	 String imgname=multipartFile.getOriginalFilename();
-	    	 //¸üÃû
-	    	 if(imgname.lastIndexOf(".")!=-1){
-	    		 //»ñÈ¡ºó×º
-	    		 String ext=imgname.substring(imgname.lastIndexOf("."));
-	    		 //ÅĞ¶Ïºó×º¸ñÊ½
-	    		 if(ext.equalsIgnoreCase(".jpg")||ext.equalsIgnoreCase(".png")){
-	    			 //¸ÄÃû
-	    			 String newimgname=sp.getSname()+ext;
-	    			 //´´½¨ÎÄ¼ş¶ÔÏó£¬Ö¸¶¨ÉÏ´«ÎÄ¼şµÄÂ·¾¶
-	    			 File dostFile=new File(realpath+"/shop/"+newimgname);
-	    			 //ÉÏ´«
-	    			 try {
+		String realpath=request.getRealPath("/");
+		/**********æ–‡ä»¶ä¸Šä¼ ************/
+		//è·å–ä¸Šä¼ ç…§ç‰‡å¯¹è±¡
+		MultipartFile multipartFile=sp.getPic();
+		if(multipartFile!=null&&!multipartFile.isEmpty()){
+			//è·å–ä¸Šä¼ æ–‡ä»¶åç§°
+			String imgname=multipartFile.getOriginalFilename();
+			//æ›´å
+			if(imgname.lastIndexOf(".")!=-1){
+				//è·å–åç¼€
+				String ext=imgname.substring(imgname.lastIndexOf("."));
+				//åˆ¤æ–­åç¼€æ ¼å¼
+				if(ext.equalsIgnoreCase(".jpg")||ext.equalsIgnoreCase(".png")){
+					//æ”¹å
+					String newimgname=sp.getSname()+ext;
+					//åˆ›å»ºæ–‡ä»¶å¯¹è±¡ï¼ŒæŒ‡å®šä¸Šä¼ æ–‡ä»¶çš„è·¯å¾„
+					File dostFile=new File(realpath+"/shop/"+newimgname);
+					//ä¸Šä¼ 
+					try {
 						FileUtils.copyInputStreamToFile(multipartFile.getInputStream(), dostFile);
-						 System.out.println("ÎÄ¼şÉÏ´«³É¹¦");
-						  sp.setImgname(newimgname);
-						 //É¾³ıÔ­À´µÄÕÕÆ¬£¬»ñÈ¡Ô­À´µÄÎÄ¼ş¶ÔÏó
-						 File oldfile=new File(realpath+"/shop/"+oldimgname);
-						 if(oldfile.exists()&&!oldfile.equals("default.jpg")){
-							 oldfile.delete();//É¾³ıÔ­À´µÄ
-						 }
-						 
+						System.out.println("æ–‡ä»¶ä¸Šä¼ æˆåŠŸ");
+						sp.setImgname(newimgname);
+						//åˆ é™¤åŸæ¥çš„ç…§ç‰‡ï¼Œè·å–åŸæ¥çš„æ–‡ä»¶å¯¹è±¡
+						File oldfile=new File(realpath+"/shop/"+oldimgname);
+						if(oldfile.exists()&&!oldfile.equals("default.jpg")){
+							oldfile.delete();//åˆ é™¤åŸæ¥çš„
+						}
+
 					} catch (IOException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-	    		 }
-	    	 }
-	     }else{
-	    	 //Ã»ÓĞÎÄ¼şÉÏ´«
-	    	 sp.setImgname(oldimgname);
-	     }
-	     /**********ÎÄ¼şÉÏ´«end************/
-	     boolean flag=iBiz.update(sp);
-	     if(flag){
-	    	 return "redirect:findAllPage_Shop.do";
-	     }
-	     
+				}
+			}
+		}else{
+			//æ²¡æœ‰æ–‡ä»¶ä¸Šä¼ 
+			sp.setImgname(oldimgname);
+		}
+		/**********æ–‡ä»¶ä¸Šä¼ end************/
+		boolean flag=iBiz.update(sp);
+		if(flag){
+			return "redirect:findAllPage_Shop.do";
+		}
+
 		return "redirect:add.jsp";
 	}
 
 	@RequestMapping(value="delById_Shop.do")
 	public String delById(HttpServletRequest request, HttpServletResponse response, String sid) {
-		//»ñÈ¡Ô­À´µÄÕÕÆ¬£¬ÔÚ²»ĞŞ¸ÄÕÕÆ¬µÄÊ±ºò£¬Õ¹Ê¾Ô­À´µÄÕÕÆ¬
+		//è·å–åŸæ¥çš„ç…§ç‰‡ï¼Œåœ¨ä¸ä¿®æ”¹ç…§ç‰‡çš„æ—¶å€™ï¼Œå±•ç¤ºåŸæ¥çš„ç…§ç‰‡
 		String oldimgname=iBiz.findById(sid).getImgname();
-		 String realpath=request.getRealPath("/");
-		 boolean flag=iBiz.delById(sid);
-		 if(flag){
-			 //É¾³ıÕÕÆ¬
-			 File oldfile=new File(realpath+"/SHOP/"+oldimgname);
-			 if(oldfile.exists()&&!oldfile.equals("default.jpg")){
-				 oldfile.delete();//É¾³ıÔ­À´µÄ
-			 }
-			 return "redirect:findAllPage_Shop.do";
-		 }
-		 
-		 return "redirect:add.jsp";
+		String realpath=request.getRealPath("/");
+		boolean flag=iBiz.delById(sid);
+		if(flag){
+			//åˆ é™¤ç…§ç‰‡
+			File oldfile=new File(realpath+"/SHOP/"+oldimgname);
+			if(oldfile.exists()&&!oldfile.equals("default.jpg")){
+				oldfile.delete();//åˆ é™¤åŸæ¥çš„
+			}
+			return "redirect:findAllPage_Shop.do";
+		}
+
+		return "redirect:add.jsp";
 	}
 
 	@RequestMapping(value="findById_Shop.do")
@@ -257,19 +256,19 @@ public class ShopAction implements IShopAction {
 	@RequestMapping(value="findAllPage_Shop.do")
 	public String findAllPage(HttpServletRequest request, HttpServletResponse response, Integer page, Integer rows) {
 		session=request.getSession();
-		//´ÓsessionÖĞ»ñÈ¡pb¶ÔÏó
+		//ä»sessionä¸­è·å–pbå¯¹è±¡
 		PageBean pb=(PageBean)session.getAttribute("pb");
 		pb=pb==null?new PageBean():pb;
 		page=page==null || page<1?pb.getPage():page;
 		rows=rows==null || rows<1?pb.getRows():rows;
 		if(page<1)page=1;
 		if(rows<1)rows=5;
-		//»ñÈ¡×ÜÒ³Êı
+		//è·å–æ€»é¡µæ•°
 		int maxpage=iBiz.findMaxPage(rows);
 		if(page>maxpage)page=maxpage;
-		//»ñÈ¡µ±Ç°Ò³¼ÇÂ¼¼¯ºÏ
+		//è·å–å½“å‰é¡µè®°å½•é›†åˆ
 		List<Shop> list=iBiz.findAllPage(page, rows);
-		//¼ì²é·ÖÒ³Êı¾İ·â×°pb¶ÔÏó
+		//æ£€æŸ¥åˆ†é¡µæ•°æ®å°è£…pbå¯¹è±¡
 		pb.setMaxpage(maxpage);
 		pb.setPage(page);
 		pb.setRows(rows);
