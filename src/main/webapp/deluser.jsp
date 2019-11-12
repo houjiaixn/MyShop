@@ -11,7 +11,7 @@ response.setCharacterEncoding("utf-8");
 <title>注销账户</title>
 </head>
 <body style="background-image:url(image/2.jpg);background-repeat:no-repeat;background-size:1600px 1024px;
-background-position-x:50%">
+background-position-x:50%;margin-top:10%">
 <form method="post" action="UdelById_Shop.do">
 <table align="center" border="1px" width="260px" height="10px">
 <tr>

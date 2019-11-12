@@ -34,7 +34,7 @@ function docbangePage(){
 </script>
 </head>
 <body
-	style="background-image: url(image/2.jpg); background-repeat: no-repeat; background-size: 1600px 1024px; background-position-x: 50%">
+	style="background-image: url(image/2.jpg); background-repeat: no-repeat; background-size: 1600px 1024px; background-position-x: 50%;margin-top:10%">
 	<h1 align="center">商品展示</h1>
 	<form action="" id="form1" name="form1" method="post">
 		<table align="center" border="1px" width="650px" height="100px">

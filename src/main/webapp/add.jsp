@@ -14,7 +14,7 @@ response.setCharacterEncoding("utf-8");
 <title>商品添加</title>
 </head>
 <body style="background-image:url(image/2.jpg);background-repeat:no-repeat;background-size:1600px 1024px;
-background-position-x:50%">
+background-position-x:50%;margin-top:10%">
 <h1 align="center">欢迎使用超市管理系统</h1>
 <form name="form" action="save_Shop.do" enctype="multipart/form-data" method="post">
 <table align="center" border="1px" width="470px" height="100px">

@@ -12,7 +12,7 @@ Shop oldsp=(Shop)session.getAttribute("oldsp");
 %>
 </head>
 <body style="background-image:url(image/2.jpg);background-repeat:no-repeat;background-size:1600px 1024px;
-background-position-x:50%">
+background-position-x:50%;margin-top:10%">
 <form action="update_Shop.do" enctype="multipart/form-data" method="post">
 <table align="center" border="1px" width="450px" height="100px">
 <tr>

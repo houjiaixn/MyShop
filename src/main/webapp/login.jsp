@@ -11,7 +11,7 @@ response.setCharacterEncoding("utf-8");
 <title>登录</title>
 </head>
 <body
-	style="background-image: url(image/2.jpg); background-repeat: no-repeat; background-size: 1600px 1024px; background-position-x: 50%">
+	style="background-image: url(image/2.jpg); background-repeat: no-repeat; background-size: 1600px 1024px; background-position-x: 50%;margin-top:10%">
 	<h1 align="center">欢迎使用超市管理系统</h1>
 	<form method="post" action="UfindById_Shop.do">
 		<table align="center" border="1px" width="230px" height="10px">

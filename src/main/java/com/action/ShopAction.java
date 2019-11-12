@@ -48,10 +48,10 @@ public class ShopAction implements IShopAction {
 		System.out.println(flag);
 		if(flag){
 			session = request.getSession();
-			session.setAttribute("success", "æ³¨å†ŒæˆåŠŸï¼");
+			session.setAttribute("success", "×¢²á³É¹¦£¡");
 			return "redirect:login.jsp";
 		}else{
-			session.setAttribute("message", "è´¦æˆ·è¶…è¿‡äº”ä¸ªï¼Œæ³¨å†Œå¤±è´¥ï¼");
+			session.setAttribute("message", "ÕË»§³¬¹ıÎå¸ö£¬×¢²áÊ§°Ü£¡");
 			return "redirect:register.jsp";
 		}
 	}
@@ -65,11 +65,12 @@ public class ShopAction implements IShopAction {
 		System.out.println(olduser.getUname()+olduser.getUpassword());
 		if(uname.equals(olduser.getUname())&&upassword.equals(olduser.getUpassword())){
 			session = request.getSession();
-			session.setAttribute("success", "ç™»å½•æˆåŠŸï¼");
-			System.out.println("ç™»é™†æˆåŠŸ");
+			response.setCharacterEncoding("utf-8");
+			session.setAttribute("success", "µÇÂ¼³É¹¦£¡");
+			System.out.println("µÇÂ½³É¹¦");
 			return "redirect:add.jsp";
 		}else {
-			session.setAttribute("message", "ç™»é™†å¤±è´¥ï¼Œè´¦å·æˆ–è€…å¯†ç é”™è¯¯ï¼");
+			session.setAttribute("message", "µÇÂ½Ê§°Ü£¬ÕËºÅ»òÕßÃÜÂë´íÎó£¡");
 			return "redirect:register.jsp";
 		}
 	}
@@ -100,10 +101,10 @@ public class ShopAction implements IShopAction {
 			boolean flag = iBiz.updata(user);
 			if(flag){
 				session = request.getSession();
-				session.setAttribute("success", "ä¿®æ”¹æˆåŠŸï¼Œè¯·é‡æ–°ç™»å½•");
+				session.setAttribute("success", "ĞŞ¸Ä³É¹¦£¬ÇëÖØĞÂµÇÂ¼");
 				return "redirect:login.jsp";
 			}else{
-				session.setAttribute("message", "ä¿®æ”¹å¤±è´¥ï¼Œè¯·æ³¨å†Œ");
+				session.setAttribute("message", "ĞŞ¸ÄÊ§°Ü£¬Çë×¢²á");
 				return "redirect:register.jsp";
 			}
 		}
@@ -112,7 +113,7 @@ public class ShopAction implements IShopAction {
 
 	@RequestMapping(value="UdelById_Shop.do")
 	public String UdelById(HttpServletRequest request, HttpServletResponse response, String uname) {
-		//æ³¨é”€é¡µé¢
+		//×¢ÏúÒ³Ãæ
 		uname=request.getParameter("uname");
 		String upassword = request.getParameter("upassword");
 		String queshion = request.getParameter("queshion");
@@ -125,10 +126,10 @@ public class ShopAction implements IShopAction {
 			boolean flag=iBiz.UdelById(olduser.getUname());
 			if(flag){
 				session = request.getSession();
-				session.setAttribute("message", "æ³¨é”€æˆåŠŸï¼");
+				session.setAttribute("message", "×¢Ïú³É¹¦£¡");
 				return "redirect:register.jsp";
 			}else{
-				session.setAttribute("success", "è¯·é‡æ–°ç™»å½•ï¼");
+				session.setAttribute("success", "ÇëÖØĞÂµÇÂ¼£¡");
 				return "redirect:login.jsp";
 			}
 		}
@@ -138,23 +139,23 @@ public class ShopAction implements IShopAction {
 	@RequestMapping(value="save_Shop.do")
 	public String save(HttpServletRequest request, HttpServletResponse response, Shop sp) {
 		String realpath=request.getRealPath("/");
-		/**********æ–‡ä»¶ä¸Šä¼ ************/
-		//è·å–ä¸Šä¼ ç…§ç‰‡å¯¹è±¡
+		/**********ÎÄ¼şÉÏ´«************/
+		//»ñÈ¡ÉÏ´«ÕÕÆ¬¶ÔÏó
 		MultipartFile multipartFile=sp.getPic();
 		if(multipartFile!=null&&!multipartFile.isEmpty()){
-			//è·å–ä¸Šä¼ æ–‡ä»¶åç§°
+			//»ñÈ¡ÉÏ´«ÎÄ¼şÃû³Æ
 			String imgname=multipartFile.getOriginalFilename();
-			//æ›´å
+			//¸üÃû
 			if(imgname.lastIndexOf(".")!=-1){
-				//è·å–åç¼€
+				//»ñÈ¡ºó×º
 				String ext=imgname.substring(imgname.lastIndexOf("."));
-				//åˆ¤æ–­åç¼€æ ¼å¼
+				//ÅĞ¶Ïºó×º¸ñÊ½
 				if(ext.equalsIgnoreCase(".jpg")||ext.equalsIgnoreCase(".png")){
-					//æ”¹å
+					//¸ÄÃû
 					String newimgname=sp.getSname()+ext;
-					//åˆ›å»ºæ–‡ä»¶å¯¹è±¡ï¼ŒæŒ‡å®šä¸Šä¼ æ–‡ä»¶çš„è·¯å¾„
+					//´´½¨ÎÄ¼ş¶ÔÏó£¬Ö¸¶¨ÉÏ´«ÎÄ¼şµÄÂ·¾¶
 					File dostFile=new File(realpath+"/shop/"+newimgname);
-					//ä¸Šä¼ 
+					//ÉÏ´«
 					try {
 						FileUtils.copyInputStreamToFile(multipartFile.getInputStream(), dostFile);
 						sp.setImgname(newimgname);
@@ -165,47 +166,47 @@ public class ShopAction implements IShopAction {
 				}
 			}
 		}
-		/**********æ–‡ä»¶ä¸Šä¼ end************/
+		/**********ÎÄ¼şÉÏ´«end************/
 		boolean flag=iBiz.save(sp);
 		if(flag){
 			session = request.getSession();
-			session.setAttribute("success", "æ·»åŠ å•†å“æˆåŠŸï¼");
+			session.setAttribute("success", "Ìí¼ÓÉÌÆ·³É¹¦£¡");
 			return "redirect:findAllPage_Shop.do";
 		}
-		session.setAttribute("success", "æ·»åŠ å•†å“å¤±è´¥ï¼");
+		session.setAttribute("success", "Ìí¼ÓÉÌÆ·Ê§°Ü£¡");
 		return "redirect:add.jsp";
 	}
 
 	@RequestMapping(value="update_Shop.do")
 	public String update(HttpServletRequest request, HttpServletResponse response, Shop sp) {
-		//è·å–åŸæ¥çš„ç…§ç‰‡ï¼Œåœ¨ä¸ä¿®æ”¹ç…§ç‰‡çš„æ—¶å€™ï¼Œå±•ç¤ºåŸæ¥çš„ç…§ç‰‡
+		//»ñÈ¡Ô­À´µÄÕÕÆ¬£¬ÔÚ²»ĞŞ¸ÄÕÕÆ¬µÄÊ±ºò£¬Õ¹Ê¾Ô­À´µÄÕÕÆ¬
 		String oldimgname=iBiz.findById(sp.getSid()).getImgname();
 		String realpath=request.getRealPath("/");
-		/**********æ–‡ä»¶ä¸Šä¼ ************/
-		//è·å–ä¸Šä¼ ç…§ç‰‡å¯¹è±¡
+		/**********ÎÄ¼şÉÏ´«************/
+		//»ñÈ¡ÉÏ´«ÕÕÆ¬¶ÔÏó
 		MultipartFile multipartFile=sp.getPic();
 		if(multipartFile!=null&&!multipartFile.isEmpty()){
-			//è·å–ä¸Šä¼ æ–‡ä»¶åç§°
+			//»ñÈ¡ÉÏ´«ÎÄ¼şÃû³Æ
 			String imgname=multipartFile.getOriginalFilename();
-			//æ›´å
+			//¸üÃû
 			if(imgname.lastIndexOf(".")!=-1){
-				//è·å–åç¼€
+				//»ñÈ¡ºó×º
 				String ext=imgname.substring(imgname.lastIndexOf("."));
-				//åˆ¤æ–­åç¼€æ ¼å¼
+				//ÅĞ¶Ïºó×º¸ñÊ½
 				if(ext.equalsIgnoreCase(".jpg")||ext.equalsIgnoreCase(".png")){
-					//æ”¹å
+					//¸ÄÃû
 					String newimgname=sp.getSname()+ext;
-					//åˆ›å»ºæ–‡ä»¶å¯¹è±¡ï¼ŒæŒ‡å®šä¸Šä¼ æ–‡ä»¶çš„è·¯å¾„
+					//´´½¨ÎÄ¼ş¶ÔÏó£¬Ö¸¶¨ÉÏ´«ÎÄ¼şµÄÂ·¾¶
 					File dostFile=new File(realpath+"/shop/"+newimgname);
-					//ä¸Šä¼ 
+					//ÉÏ´«
 					try {
 						FileUtils.copyInputStreamToFile(multipartFile.getInputStream(), dostFile);
-						System.out.println("æ–‡ä»¶ä¸Šä¼ æˆåŠŸ");
+						System.out.println("ÎÄ¼şÉÏ´«³É¹¦");
 						sp.setImgname(newimgname);
-						//åˆ é™¤åŸæ¥çš„ç…§ç‰‡ï¼Œè·å–åŸæ¥çš„æ–‡ä»¶å¯¹è±¡
+						//É¾³ıÔ­À´µÄÕÕÆ¬£¬»ñÈ¡Ô­À´µÄÎÄ¼ş¶ÔÏó
 						File oldfile=new File(realpath+"/shop/"+oldimgname);
 						if(oldfile.exists()&&!oldfile.equals("default.jpg")){
-							oldfile.delete();//åˆ é™¤åŸæ¥çš„
+							oldfile.delete();//É¾³ıÔ­À´µÄ
 						}
 
 					} catch (IOException e) {
@@ -215,10 +216,10 @@ public class ShopAction implements IShopAction {
 				}
 			}
 		}else{
-			//æ²¡æœ‰æ–‡ä»¶ä¸Šä¼ 
+			//Ã»ÓĞÎÄ¼şÉÏ´«
 			sp.setImgname(oldimgname);
 		}
-		/**********æ–‡ä»¶ä¸Šä¼ end************/
+		/**********ÎÄ¼şÉÏ´«end************/
 		boolean flag=iBiz.update(sp);
 		if(flag){
 			return "redirect:findAllPage_Shop.do";
@@ -229,15 +230,15 @@ public class ShopAction implements IShopAction {
 
 	@RequestMapping(value="delById_Shop.do")
 	public String delById(HttpServletRequest request, HttpServletResponse response, String sid) {
-		//è·å–åŸæ¥çš„ç…§ç‰‡ï¼Œåœ¨ä¸ä¿®æ”¹ç…§ç‰‡çš„æ—¶å€™ï¼Œå±•ç¤ºåŸæ¥çš„ç…§ç‰‡
+		//»ñÈ¡Ô­À´µÄÕÕÆ¬£¬ÔÚ²»ĞŞ¸ÄÕÕÆ¬µÄÊ±ºò£¬Õ¹Ê¾Ô­À´µÄÕÕÆ¬
 		String oldimgname=iBiz.findById(sid).getImgname();
 		String realpath=request.getRealPath("/");
 		boolean flag=iBiz.delById(sid);
 		if(flag){
-			//åˆ é™¤ç…§ç‰‡
+			//É¾³ıÕÕÆ¬
 			File oldfile=new File(realpath+"/SHOP/"+oldimgname);
 			if(oldfile.exists()&&!oldfile.equals("default.jpg")){
-				oldfile.delete();//åˆ é™¤åŸæ¥çš„
+				oldfile.delete();//É¾³ıÔ­À´µÄ
 			}
 			return "redirect:findAllPage_Shop.do";
 		}
@@ -256,19 +257,19 @@ public class ShopAction implements IShopAction {
 	@RequestMapping(value="findAllPage_Shop.do")
 	public String findAllPage(HttpServletRequest request, HttpServletResponse response, Integer page, Integer rows) {
 		session=request.getSession();
-		//ä»sessionä¸­è·å–pbå¯¹è±¡
+		//´ÓsessionÖĞ»ñÈ¡pb¶ÔÏó
 		PageBean pb=(PageBean)session.getAttribute("pb");
 		pb=pb==null?new PageBean():pb;
 		page=page==null || page<1?pb.getPage():page;
 		rows=rows==null || rows<1?pb.getRows():rows;
 		if(page<1)page=1;
 		if(rows<1)rows=5;
-		//è·å–æ€»é¡µæ•°
+		//»ñÈ¡×ÜÒ³Êı
 		int maxpage=iBiz.findMaxPage(rows);
 		if(page>maxpage)page=maxpage;
-		//è·å–å½“å‰é¡µè®°å½•é›†åˆ
+		//»ñÈ¡µ±Ç°Ò³¼ÇÂ¼¼¯ºÏ
 		List<Shop> list=iBiz.findAllPage(page, rows);
-		//æ£€æŸ¥åˆ†é¡µæ•°æ®å°è£…pbå¯¹è±¡
+		//¼ì²é·ÖÒ³Êı¾İ·â×°pb¶ÔÏó
 		pb.setMaxpage(maxpage);
 		pb.setPage(page);
 		pb.setRows(rows);
