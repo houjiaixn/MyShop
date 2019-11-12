@@ -1,0 +1,247 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>xitong</groupId>
+  <artifactId>MVNShop</artifactId>
+  <packaging>war</packaging>
+  <version>0.0.1-SNAPSHOT</version>
+  <name>MVNShop Maven Webapp</name>
+  <url>http://maven.apache.org</url>
+  <build>
+    <finalName>MVNShop</finalName>
+  </build>
+  <!-- 项目专用 -->
+	<!-- 是为pom定义一些常量，在pom中的其它地方可以直接引用 -->
+	<properties>
+		<!--设置jar包的编码格式 -->
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<!--测试包的版本信息 -->
+		<junit.version>4.9</junit.version>
+		<!--Spring的版本 -->
+		<spring.version>4.3.10.RELEASE</spring.version>
+		<!-- Mybatis的版本 -->
+		<mybatis.version>3.4.4</mybatis.version>
+		<mybatis.spring.version>1.3.1</mybatis.spring.version>
+		<!--连接池版本 -->
+		<commons-dbcp.version>1.4</commons-dbcp.version>
+		<!--日志文件版本 -->
+		<log4j.version>1.2.17</log4j.version>
+		<slf4j.version>1.7.25</slf4j.version>
+		<!-- json处理的版本 -->
+		<fastjson.version>1.2.35</fastjson.version>
+		<!-- 处理xml的 -->
+		<jackson.version>1.9.13</jackson.version>
+		<!--实现文件上传的版本 -->
+		<commons-fileupload.version>1.3.3</commons-fileupload.version>
+		<!-- 处理io流的 -->
+		<commons-io.version>2.5</commons-io.version>
+		<!-- 是Apache开源组织提供的用于摘要运算、编码的包 -->
+		<commons-codec.version>1.10</commons-codec.version>
+		<!-- Spring的AOP的jar如果没有会报错，spring出现Caused by: java.lang.NoClassDefFoundError: 
+			org/aspectj/weaver/BCException -->
+		<aspectjweaver.version>1.8.10</aspectjweaver.version>
+	</properties>
+
+	<dependencies>
+
+		<!-- https://mvnrepository.com/artifact/com.github.noraui/ojdbc7 -->
+		<dependency>
+			<!-- 数据库驱动包版本 -->
+			 <groupId>mysql</groupId>
+             <artifactId>mysql-connector-java</artifactId>
+             <version>5.1.33</version>
+			<!-- 也就是说这个项目在编译，测试，运行阶段都需要这个artifact对应的jar包在classpath中 -->
+			<scope>compile</scope>
+		</dependency>
+
+		<!-- 丛属于 -->
+		<dependency>
+			<!-- junit是eclipse提供的一个通过main方法进行单元测试的技术 -->
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>3.8.1</version>
+			<!-- scope表示开发的时候引入，发布的时候不会加载此包 -->
+			<scope>test</scope>
+		</dependency>
+
+		<!-- spring包 core、web、oxm、tx、jdbc、webmvc、aop、context、test -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<!-- 将bean转换为xml -->
+			<artifactId>spring-oxm</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<!--Spring的事物处理  -->
+			<artifactId>spring-tx</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jdbc</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-aop</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<!-- 整合任务的 -->
+			<artifactId>spring-context-support</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<!-- 单元测试jar -->
+			<artifactId>spring-test</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<!-- mybatis核心包 -->
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis</artifactId>
+			<version>${mybatis.version}</version>
+		</dependency>
+		<!-- mybatis/spring包 -->
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis-spring</artifactId>
+			<version>${mybatis.spring.version}</version>
+		</dependency>
+
+		<!-- 导入dbcp的jar包，用来在applicationContext.xml中配置数据库 -->
+		<dependency>
+			<groupId>commons-dbcp</groupId>
+			<artifactId>commons-dbcp</artifactId>
+			<version>${commons-dbcp.version}</version>
+		</dependency>
+
+		<!-- 日志文件管理包 -->
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>${log4j.version}</version>
+		</dependency>
+
+		<!-- 格式化对象，方便输出日志 -->
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>fastjson</artifactId>
+			<version>${fastjson.version}</version>
+		</dependency>
+
+        <!-- 日志 -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>${slf4j.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<version>${slf4j.version}</version>
+		</dependency>
+
+		<!-- json和bean之间相互转换 -->
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-core-asl</artifactId>
+			<version>${jackson.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-mapper-asl</artifactId>
+			<version>${jackson.version}</version>
+		</dependency>
+
+		<!-- 上传组件包 -->
+		<dependency>
+			<groupId>commons-fileupload</groupId>
+			<artifactId>commons-fileupload</artifactId>
+			<version>${commons-fileupload.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>${commons-io.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-codec</groupId>
+			<artifactId>commons-codec</artifactId>
+			<version>${commons-codec.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjweaver</artifactId>
+			<version>${aspectjweaver.version}</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<!-- 配置servlet控制器 -->
+			<artifactId>javax.servlet-api</artifactId>
+			<version>4.0.0</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/javax.servlet.jsp/javax.servlet.jsp-api -->
+		<dependency>
+			<groupId>javax.servlet.jsp</groupId>
+			<artifactId>javax.servlet.jsp-api</artifactId>
+			<version>2.3.1</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.apache.taglibs/taglibs-standard-jstlel -->
+		<dependency>
+			<groupId>org.apache.taglibs</groupId>
+			<!--jstl jsp标准标签库  -->
+			<artifactId>taglibs-standard-jstlel</artifactId>
+			<version>1.2.5</version>
+			<scope>compile</scope>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.apache.taglibs/taglibs-standard-jstlel -->
+		<dependency>
+			<groupId>org.apache.taglibs</groupId>
+			<!--jstl jsp标准标签库  -->
+			<artifactId>taglibs-standard-jstlel</artifactId>
+			<version>1.2.5</version>
+			<scope>compile</scope>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.apache.taglibs/taglibs-standard-compat -->
+		<dependency>
+			<groupId>org.apache.taglibs</groupId>
+			<!--jstl jsp标准标签库  -->
+			<artifactId>taglibs-standard-compat</artifactId>
+			<version>1.2.5</version>
+			<scope>compile</scope>
+		</dependency>
+
+	</dependencies>
+</project>
