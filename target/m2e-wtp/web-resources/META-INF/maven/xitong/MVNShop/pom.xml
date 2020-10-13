@@ -59,7 +59,7 @@
 			<!-- junit是eclipse提供的一个通过main方法进行单元测试的技术 -->
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>3.8.1</version>
+			<version>4.13.1</version>
 			<!-- scope表示开发的时候引入，发布的时候不会加载此包 -->
 			<scope>test</scope>
 		</dependency>
