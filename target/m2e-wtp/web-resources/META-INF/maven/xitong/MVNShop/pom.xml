@@ -34,7 +34,7 @@
 		<!--实现文件上传的版本 -->
 		<commons-fileupload.version>1.3.3</commons-fileupload.version>
 		<!-- 处理io流的 -->
-		<commons-io.version>2.5</commons-io.version>
+		<commons-io.version>2.7</commons-io.version>
 		<!-- 是Apache开源组织提供的用于摘要运算、编码的包 -->
 		<commons-codec.version>1.10</commons-codec.version>
 		<!-- Spring的AOP的jar如果没有会报错，spring出现Caused by: java.lang.NoClassDefFoundError: 
