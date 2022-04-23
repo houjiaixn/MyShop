@@ -18,7 +18,7 @@
 		<!--测试包的版本信息 -->
 		<junit.version>4.9</junit.version>
 		<!--Spring的版本 -->
-		<spring.version>4.3.10.RELEASE</spring.version>
+		<spring.version>5.3.19</spring.version>
 		<!-- Mybatis的版本 -->
 		<mybatis.version>3.4.4</mybatis.version>
 		<mybatis.spring.version>1.3.1</mybatis.spring.version>
